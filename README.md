@@ -299,7 +299,7 @@ Essas funções buscam as ids das proposições dos últimos 3 dias tanto na __A
 
 Ex.:
 
-[2299492, 2299490, 2299463, 2299442, 2299414, 2299406] = [2299492, 2299490, 2299463, 2299442, 2299414, 2299406]
+`[2299492, 2299490, 2299463, 2299442] = [2299492, 2299490, 2299463, 2299442]`
 
 Se as 2 listas foram iguais, o teste passou (__PASSED__)
 
@@ -328,7 +328,7 @@ A função *baixa_pdf_e_faz_hash_md5_para_teste()* faz o hash md5 do arquivo e o
 
 Ex.:
 
-f4bee1db1c5f08b1f9f25b57520d56d3 = f4bee1db1c5f08b1f9f25b57520d56d3
+`f4bee1db1c5f08b1f9f25b57520d56d3 = f4bee1db1c5f08b1f9f25b57520d56d3`
 
 Se as 2 hashs md5 foram iguais, o teste passou (__PASSED__)
 
