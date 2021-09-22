@@ -256,7 +256,7 @@ Digite ` pytest -vv ` no terminal:
 (env) E:\SIGALEI><b>pytest -vv</b>
 </pre>
 
-O *pytest* irá rodas os testes programados em seguida e apresentar se cada teste passou (__PASSED__) ou falhou (__FAILED__)
+O *pytest* irá rodas os testes programados em seguida e apresentar se cada teste passou (__PASSED__) :heavy_check_mark: ou falhou (__FAILED__) :x:
 
 ## Explicando os Testes:
 
@@ -274,7 +274,7 @@ Foram desenvolvidos 3 testes automatizados
    
    É realizado um *assert* comparando a proposição que foi passada como parâmetro e a proposição extraída da resposta. 
    
-   Caso sejam iguais, o teste passou (__PASSED__)
+   Caso sejam iguais, o teste passou (__PASSED__) :heavy_check_mark:
    
    ```
    def test_acesso_a_api_do_site_da_camara():
@@ -301,7 +301,7 @@ Ex.:
 
 `[2299492, 2299490, 2299463, 2299442] = [2299492, 2299490, 2299463, 2299442]`
 
-Se as 2 listas foram iguais, o teste passou (__PASSED__)
+Se as 2 listas foram iguais, o teste passou (__PASSED__) :heavy_check_mark:
 
 ```
 def test_de_match_da_api_dos_dados_abertos_com_api_dentro_do_dite_da_camara():
@@ -330,7 +330,7 @@ Ex.:
 
 `f4bee1db1c5f08b1f9f25b57520d56d3 = f4bee1db1c5f08b1f9f25b57520d56d3`
 
-Se as 2 hashs md5 foram iguais, o teste passou (__PASSED__)
+Se as 2 hashs md5 foram iguais, o teste passou (__PASSED__) :heavy_check_mark:
 
 ```
 def test_de_match_de_hash_md5_entre_pdf_Inteiro_teor_baixado_e_mock():
