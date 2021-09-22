@@ -77,7 +77,7 @@ def acessa_api_camara(ano_atual, tipo_proposicao, numero_da_pagina):
     return response.json()
 ```
 ***
-2) Com a resposta da API do site oficial da Câmara dos Deputados é feito o *scrape* da __*data da apresentação da proposição*__, do __*título*__(ou nome)__*da proposição*__ e __*id da proposição*__. 
+2) Com a resposta da __API__ do site oficial da Câmara dos Deputados é feito o *scrape* da __*data da apresentação da proposição*__, do __*título*__(ou nome)__*da proposição*__ e __*id da proposição*__. 
    <br></br>
    O id da proposição é passado no link de cada proposição `  f'https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao={id_preposicao}'  `
    <br></br>
@@ -89,7 +89,7 @@ def acessa_api_camara(ano_atual, tipo_proposicao, numero_da_pagina):
 
 ## * retorna_props()
 
-Recebe a resposta em JSON da API da Câmara e extrai dados **data de apresentação, titulo da proposição e id da proposição**.
+Recebe a resposta em __JSON__ da __API__ da Câmara e extrai dados **data de apresentação, titulo da proposição e id da proposição**.
 
 Ex.:
 
@@ -97,7 +97,7 @@ data de apresentação | titulo da proposição | id da proposição
 -- | -- | --
 2021-09-17T15:25:00 | PL 3211/2021 | 2299232
 
-A *Id da proposição* é usada para completar o link onde está localizado o pdf de __*Inteiro Teor*__ e fazer o download.
+A *Id da proposição* é usada para completar o link onde está localizado o PDF de __*Inteiro Teor*__ e fazer o download.
 Cada pd é salvo temporariamente e desse arquivo temporário é extraído o hash md5.
 
 Com isso, o md5 de cada proposição é formando listas com **data de apresentação, título da proposição, id da proposição e md5**.
