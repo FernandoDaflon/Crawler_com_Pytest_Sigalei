@@ -60,6 +60,7 @@ class CrawlerClass:
         if datau >= dias_3:
             lista_preposicoes = []
             while n_i < qtd_pags:
+                print(f'== Fazendo o crawling da pagina {n_i}')
                 resp_json = self.acessa_api_camara(ano_atual, tipo_proposicao, n_i)
                 n_i += 1
                 qtd_paginado = len(resp_json['hits']['hits'])
@@ -69,6 +70,7 @@ class CrawlerClass:
                 lista_preposicoes.append(rr)
             return list(itertools.chain.from_iterable(lista_preposicoes))
         else:
+            print(f'== Fazendo o crawling da pagina {n_i}')
             return self.retorna_props(qtd, resp_json, dias_3)
 
     # ================================================================================
@@ -80,6 +82,7 @@ class CrawlerClass:
     # A função retorna uma listas com essas listas
 
     def retorna_props(self, qtd, resp_json, dias_3):
+        print('Fazendo scraping dos dados.')
         lista_preps = []
         i = 0
         while i < qtd:
@@ -107,6 +110,7 @@ class CrawlerClass:
                     md5 = hashlib.md5()
                     md5.update(content)
                     md5_pdf = md5.hexdigest()
+                    print(f'Data: {data.strftime("%Y-%m-%d")} - Proposicao: {titulo} - md5: {md5_pdf}')
                 lista_preps.append([data.strftime('%Y-%m-%d'), titulo, id_preposicao, md5_pdf])
             else:
                 pass
