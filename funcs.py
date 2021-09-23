@@ -70,7 +70,7 @@ class CrawlerClass:
                 lista_preposicoes.append(rr)
             return list(itertools.chain.from_iterable(lista_preposicoes))
         else:
-            print(f'== Fazendo o crawling da pagina {n_i}')
+            print(f'==> Fazendo o crawling da pagina {n_i}')
             return self.retorna_props(qtd, resp_json, dias_3)
 
     # ================================================================================

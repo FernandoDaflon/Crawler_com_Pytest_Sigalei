@@ -10,7 +10,7 @@ def main(tipo_proposicao):
         os.remove('salva_pdf.pdf')
     except:
         pass
-    print('--------------------')
+    print('----------------------')
     formato_exportacao = input('DIGITE O FORMATO PARA SER EXPORTADO (CSV OU JSON): ').upper().strip()
     lista_formatos = ['CSV', 'JSON']
     while formato_exportacao not in lista_formatos:
