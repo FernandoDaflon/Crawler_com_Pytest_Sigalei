@@ -8,7 +8,8 @@ import json
 from math import ceil
 import os
 import itertools
-
+from tqdm import tqdm
+import time
 
 class CrawlerClass:
 
@@ -60,6 +61,7 @@ class CrawlerClass:
         if datau >= dias_3:
             lista_preposicoes = []
             while n_i < qtd_pags:
+                print('')
                 print(f'== Fazendo o crawling da pagina {n_i}')
                 resp_json = self.acessa_api_camara(ano_atual, tipo_proposicao, n_i)
                 n_i += 1
@@ -70,6 +72,7 @@ class CrawlerClass:
                 lista_preposicoes.append(rr)
             return list(itertools.chain.from_iterable(lista_preposicoes))
         else:
+            print('')
             print(f'==> Fazendo o crawling da pagina {n_i}')
             return self.retorna_props(qtd, resp_json, dias_3)
 
@@ -82,40 +85,44 @@ class CrawlerClass:
     # A função retorna uma listas com essas listas
 
     def retorna_props(self, qtd, resp_json, dias_3):
-        print('Fazendo scraping dos dados.')
+        # print('Fazendo scraping dos dados.')
         lista_preps = []
         i = 0
-        while i < qtd:
-            data = resp_json['hits']['hits'][i]['_source']['dataApresentacao'][:10]
-            data = datetime.strptime(data, '%Y-%m-%d').date()
-            titulo = resp_json['hits']['hits'][i]['_source']['titulo']
-            id_preposicao = resp_json['hits']['hits'][i]['_id']
-            i += 1
-            if data >= dias_3:
-                url_prep = f'https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao={id_preposicao}'
-                resp = requests.get(url=url_prep)
-                tree = html.fromstring(html=resp.text)
-                link_pdf = tree.xpath('//*[@id="content"]/h3[1]/span[2]/a/@href')[0]
-                elo = link_pdf[link_pdf.find('codteor'):]
-                url_pdf = f'https://www.camara.leg.br/proposicoesWeb/prop_mostrarintegra?{elo}.pdf'
-                chunk_size = 2000
-                r = requests.get(url_pdf, stream=True)
-                salva_pdf = 'salva_pdf'
-                with open(f'{salva_pdf}.pdf', 'wb') as fd:
-                    for chunk in r.iter_content(chunk_size):
-                        fd.write(chunk)
-                path = f'{salva_pdf}.pdf'
-                with open(path, 'rb') as opened_file:
-                    content = opened_file.read()
-                    md5 = hashlib.md5()
-                    md5.update(content)
-                    md5_pdf = md5.hexdigest()
-                    print(f'Data: {data.strftime("%Y-%m-%d")} - Proposicao: {titulo} - md5: {md5_pdf}')
-                lista_preps.append([data.strftime('%Y-%m-%d'), titulo, id_preposicao, md5_pdf])
-            else:
-                pass
+        with tqdm(total=int(qtd), ncols=100, desc='Fazendo scraping dos dados: ') as barra_de_prograsso:
+            while i < qtd:
+                time.sleep(0.1)
+                barra_de_prograsso.update(1)
+                time.sleep(0.1)
+                data = resp_json['hits']['hits'][i]['_source']['dataApresentacao'][:10]
+                data = datetime.strptime(data, '%Y-%m-%d').date()
+                titulo = resp_json['hits']['hits'][i]['_source']['titulo']
+                id_preposicao = resp_json['hits']['hits'][i]['_id']
+                i += 1
+                if data >= dias_3:
+                    url_prep = f'https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao={id_preposicao}'
+                    resp = requests.get(url=url_prep)
+                    tree = html.fromstring(html=resp.text)
+                    link_pdf = tree.xpath('//*[@id="content"]/h3[1]/span[2]/a/@href')[0]
+                    elo = link_pdf[link_pdf.find('codteor'):]
+                    url_pdf = f'https://www.camara.leg.br/proposicoesWeb/prop_mostrarintegra?{elo}.pdf'
+                    chunk_size = 2000
+                    r = requests.get(url_pdf, stream=True)
+                    salva_pdf = 'salva_pdf'
+                    with open(f'{salva_pdf}.pdf', 'wb') as fd:
+                        for chunk in r.iter_content(chunk_size):
+                            fd.write(chunk)
+                    path = f'{salva_pdf}.pdf'
+                    with open(path, 'rb') as opened_file:
+                        content = opened_file.read()
+                        md5 = hashlib.md5()
+                        md5.update(content)
+                        md5_pdf = md5.hexdigest()
+                        # print(f'Data: {data.strftime("%Y-%m-%d")} - Proposicao: {titulo} - md5: {md5_pdf}')
+                    lista_preps.append([data.strftime('%Y-%m-%d'), titulo, id_preposicao, md5_pdf])
+                else:
+                    pass
 
-        return lista_preps
+            return lista_preps
 
     # ================================================================================
 

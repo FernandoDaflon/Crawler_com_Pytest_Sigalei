@@ -1,5 +1,6 @@
 import funcs
 
+
 sigalei = funcs.CrawlerClass()
 
 def test_acesso_a_api_do_site_da_camara():
