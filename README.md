@@ -77,7 +77,7 @@ def acessa_api_camara(ano_atual, tipo_proposicao, numero_da_pagina):
     return response.json()
 ```
 ***
-2) Com a resposta da API do site oficial da Câmara dos Deputados é feito o *scrape* da __*data da apresentação da proposição*__, do __*título*__(ou nome)__*da proposição*__ e __*id da proposição*__. 
+2) Com a resposta da __API__ do site oficial da Câmara dos Deputados é feito o *scrape* da __*data da apresentação da proposição*__, do __*título*__(ou nome)__*da proposição*__ e __*id da proposição*__. 
    <br></br>
    O id da proposição é passado no link de cada proposição `  f'https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao={id_preposicao}'  `
    <br></br>
@@ -89,7 +89,7 @@ def acessa_api_camara(ano_atual, tipo_proposicao, numero_da_pagina):
 
 ## * retorna_props()
 
-Recebe a resposta em JSON da API da Câmara e extrai dados **data de apresentação, titulo da proposição e id da proposição**.
+Recebe a resposta em __JSON__ da __API__ da Câmara e extrai dados **data de apresentação, titulo da proposição e id da proposição**.
 
 Ex.:
 
@@ -97,7 +97,7 @@ data de apresentação | titulo da proposição | id da proposição
 -- | -- | --
 2021-09-17T15:25:00 | PL 3211/2021 | 2299232
 
-A *Id da proposição* é usada para completar o link onde está localizado o pdf de __*Inteiro Teor*__ e fazer o download.
+A *Id da proposição* é usada para completar o link onde está localizado o PDF de __*Inteiro Teor*__ e fazer o download.
 Cada pd é salvo temporariamente e desse arquivo temporário é extraído o hash md5.
 
 Com isso, o md5 de cada proposição é formando listas com **data de apresentação, título da proposição, id da proposição e md5**.
@@ -256,7 +256,7 @@ Digite ` pytest -vv ` no terminal:
 (env) E:\SIGALEI><b>pytest -vv</b>
 </pre>
 
-O *pytest* irá rodas os testes programados em seguida e apresentar se cada teste passou (__PASSED__) ou falhou (__FAILED__)
+O *pytest* irá rodas os testes programados em seguida e apresentar se cada teste passou (__PASSED__) :heavy_check_mark: ou falhou (__FAILED__) :x:
 
 ## Explicando os Testes:
 
@@ -274,7 +274,7 @@ Foram desenvolvidos 3 testes automatizados
    
    É realizado um *assert* comparando a proposição que foi passada como parâmetro e a proposição extraída da resposta. 
    
-   Caso sejam iguais, o teste passou (__PASSED__)
+   Caso sejam iguais, o teste passou (__PASSED__) :heavy_check_mark:
    
    ```
    def test_acesso_a_api_do_site_da_camara():
@@ -299,9 +299,9 @@ Essas funções buscam as ids das proposições dos últimos 3 dias tanto na __A
 
 Ex.:
 
-[2299492, 2299490, 2299463, 2299442, 2299414, 2299406] = [2299492, 2299490, 2299463, 2299442, 2299414, 2299406]
+`[2299492, 2299490, 2299463, 2299442] = [2299492, 2299490, 2299463, 2299442]`
 
-Se as 2 listas foram iguais, o teste passou (__PASSED__)
+Se as 2 listas foram iguais, o teste passou (__PASSED__) :heavy_check_mark:
 
 ```
 def test_de_match_da_api_dos_dados_abertos_com_api_dentro_do_dite_da_camara():
@@ -328,9 +328,9 @@ A função *baixa_pdf_e_faz_hash_md5_para_teste()* faz o hash md5 do arquivo e o
 
 Ex.:
 
-f4bee1db1c5f08b1f9f25b57520d56d3 = f4bee1db1c5f08b1f9f25b57520d56d3
+`f4bee1db1c5f08b1f9f25b57520d56d3 = f4bee1db1c5f08b1f9f25b57520d56d3`
 
-Se as 2 hashs md5 foram iguais, o teste passou (__PASSED__)
+Se as 2 hashs md5 foram iguais, o teste passou (__PASSED__) :heavy_check_mark:
 
 ```
 def test_de_match_de_hash_md5_entre_pdf_Inteiro_teor_baixado_e_mock():
